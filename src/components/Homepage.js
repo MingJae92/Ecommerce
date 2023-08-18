@@ -1,18 +1,19 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Container, Typography, Button } from '@mui/material';
+import { ShoppingCart } from '@mui/icons-material';
+
 
 function Homepage() {
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
-      style={{ minHeight: '10vh' }}
-    >
-      <Grid item>
-        <h1>Mings SUPER STORE!!!</h1>
-      </Grid>
-    </Grid>
+    <Container maxWidth="lg" sx={{ paddingTop: 5 }}>
+      <Typography variant="h2" align="center" sx={{ marginBottom: 4 }}>
+        Welcome to Mings Super Store!!!
+      </Typography>
+      <Typography variant="h5" align="center" sx={{ marginBottom: 4 }}>
+        Discover amazing products at great prices!
+      </Typography>
+     
+    </Container>
   );
 }
 
