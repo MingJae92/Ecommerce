@@ -2,7 +2,7 @@ import React from 'react'
 
 function Homepage() {
   return (
-    <div>Mings SUPER STORE!!!</div>
+    <div><h1>Mings SUPER STORE!!!</h1></div>
   )
 }
 
