@@ -23,6 +23,8 @@ function Navbar() {
                     <Link to="/aboutus"><Button color="inherit">About-Us</Button></Link>
                     <Link to="/products"><Button color="inherit">Products</Button></Link>
                     <Link to="/contactus"><Button color="inherit">Contact-Us</Button></Link>
+                    <Link to="/login"><Button color="inherit">Login</Button></Link>
+                    <Link to="/register"><Button color="inherit">Register</Button></Link>
                 </Typography>
 
 
