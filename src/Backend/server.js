@@ -7,11 +7,12 @@ dotenv.config({ path: './config/.env' })
 
 const route = express.Router();
 const app = express();
-const port = process.env.PORT 
+const port = process.env.PORT || 8000
+const dbUrl = process.env.DBCONNECTION
 
 async function connectToDataBase() {
     try {
-        await mongoose.connect(process.env.DBCONNECTION, {
+        await mongoose.connect(dbUrl, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
