@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, CssBaseline, Paper, Box } from '@mui/material';
 
 const Register = () => {
+    const [userName, setUserName]=useState(null);
+    const[email, setEmail]= useState(null)
+    const [password, setPassword] = useState(null)
+    const[confirmPassword, setConfirmPassword] = useState(null)
+
+    const data = {
+        setUserName:"",
+        setEmail:"",
+        setPassword:"",
+        setConfirmPassword:""
+        
+    }
+
+   
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

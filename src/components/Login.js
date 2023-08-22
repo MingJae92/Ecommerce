@@ -33,7 +33,7 @@ const Login = () => {
     <StyledContainer>
       <StyledPaper elevation={3}>
         <Typography variant="h5" gutterBottom>
-          Log in to Your Account
+          Log in
         </Typography>
         <form>
           <StyledTextField
