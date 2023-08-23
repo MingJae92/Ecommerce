@@ -2,6 +2,8 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose";
 dotenv.config({ path: './config/.env' })
+import userModel from "./userModel.js";
+
 
 // import mongoose from "mongoose";
 
@@ -24,7 +26,25 @@ async function connectToDataBase() {
 }
 
 connectToDataBase();
+const userDetails = new userModel
+// userDetails.save((err, data)=>{
+//     if(err){
+//         console.error(err)
+//     }else{
+//         console.log("Data saved to DB successfully", data)
+//     }
+// })
 
+async function savedUsermodel(){
+    try{
+        const savedUsermodel = await userDetails.save();
+        console.log("User details saved:" , savedUsermodel)
+    }catch(err){
+        console.error(err)
+    }
+}
+
+savedUsermodel()
 
 app.use("/v1", route);
 
