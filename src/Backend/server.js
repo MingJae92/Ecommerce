@@ -12,6 +12,7 @@ const route = express.Router();
 const app = express();
 const port = process.env.PORT || 8000
 const dbUrl = process.env.DBCONNECTION
+app.use(express.json());
 
 async function connectToDataBase() {
     try {
@@ -83,8 +84,9 @@ const Users = mongoose.model('User');
 
 // Create a user details object (replace this with your actual userDetails object)
 const usersDetails = new Users({ /* your user details here */
-userName: 'john_doe',
-email: 'john@example.com',
+userName: 'Legendlee',
+email: 'drlove@example.co.uk',
+password:"password",
 createdAt: new Date(),
 });
 
@@ -98,34 +100,41 @@ app.listen(port, () => {
     console.log(`Listening on port ${port} here we go!`);
 })
 
-app.post("/register", (res) => {
+app.use(express.json()); // Add this line to parse JSON requests
+
+app.post("/register", (req, res) => {
     bcrypt.hash(req.body.password, 10)
-        .then((hashedPassword)=>{
+        .then((hashedPassword) => {
+            console.log("Hashed Password:", hashedPassword); // Add this line for debugging
+            
             const user = new User({
-                // userName: request.body.userName,
-                email: request.body.email,
+                // userName: req.body.userName, // Uncomment this line if needed
+                email: req.body.email,
                 password: hashedPassword,
-                // confirmpassword: hashedPassword,
+                confirmpassword: hashedPassword, // It seems like this should be 'confirmpassword'
             });
-            user.save().then((result)=>{
-                res.status(201).send({
-                    message: "User created successfully!",
-                    result,
-                });
-            }).catch((err)=>{
-                res.status(500).send({
-                    message: "Error creating user",
-                    err
+            user.save()
+                .then((result) => {
+                    res.status(201).send({
+                        message: "User created successfully!",
+                        result,
+                    });
                 })
-            })
+                .catch((err) => {
+                    res.status(500).send({
+                        message: "Error creating user",
+                        err,
+                    });
+                });
         })
-        .catch((e)=>{
-            res.status(500).send(
-                {message: "Password not hashed successfully",
+        .catch((e) => {
+            res.status(500).send({
+                message: "Password not hashed successfully",
                 e,
             });
         });
-})
+});
+
 
 
 
