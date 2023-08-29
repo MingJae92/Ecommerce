@@ -84,7 +84,7 @@ app.post("/register", async (req, res) => {
     // Our register logic starts here
     try {
       // Get user input
-      const { first_name, last_name, email, password } = req.body;
+      const { first_name, last_name, username, email, password } = req.body;
   
       // Validate user input
       if (!(email && password && first_name && last_name)) {
@@ -101,13 +101,16 @@ app.post("/register", async (req, res) => {
   
       //Encrypt user password
       encryptedPassword = await bcrypt.hash(password, 10);
+      encryptedConfirmPassword = await bcrypt.hash(password, 10);
   
       // Create user in our database
       const user = await User.create({
         first_name,
         last_name,
+        username,
         email: email.toLowerCase(), // sanitize: convert email to lowercase
         password: encryptedPassword,
+        confirmedpassword:encryptedConfirmPassword
       });
   
       // Create token
@@ -128,6 +131,12 @@ app.post("/register", async (req, res) => {
     }
     // Our register logic ends here
   });
+
+  app.post("/login", async(req, res)=>{
+    try{
+        const {}
+    }
+  })
 
 
 // const Users = mongoose.model('User');
