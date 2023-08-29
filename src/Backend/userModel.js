@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    username:{
+        type: String,
+        default: null
+    },
     email:{
         type:String,
         default: null
