@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import { TextField, Button, Container, Typography, CssBaseline, Paper, Box } from '@mui/material';
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "Text change":
+      return { ...state, ...action.payload }; // Spread the existing state and apply changes
+    default:
+      return state;
+  }
+};
 
 const Register = () => {
-    const [userName, setUserName]=useState(null);
-    const[email, setEmail]= useState(null)
-    const [password, setPassword] = useState(null)
-    const[confirmPassword, setConfirmPassword] = useState(null)
+  // Define formInfo before using it in useReducer
+  const formInfo = {
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  };
 
-    const data = {
-        setUserName:"",
-        setEmail:"",
-        setPassword:"",
-        setConfirmPassword:""
-        
-    }
+  // Use formInfo as the initial state in useReducer
+  const [userInfo, dispatch] = useReducer(reducer, formInfo);
 
-   
+  const handleChange = (e) => {
+    // Create an object with the updated field value and dispatch it
+    dispatch({
+      type: "Text change",
+      payload: { [e.target.name]: e.target.value }
+    });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    // You can access the form data in userInfo for further processing if needed
+    console.log(userInfo);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -24,13 +43,15 @@ const Register = () => {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        <Box component="form" sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={submitHandler} sx={{ mt: 3 }}>
           <TextField
             margin="normal"
             required
             fullWidth
             label="Username"
-            name="username"
+            name="userName"
+            value={userInfo.userName}
+            onChange={handleChange}
             autoFocus
           />
           <TextField
@@ -39,6 +60,8 @@ const Register = () => {
             fullWidth
             label="Email Address"
             name="email"
+            value={userInfo.email}
+            onChange={handleChange}
             type="email"
           />
           <TextField
@@ -47,6 +70,8 @@ const Register = () => {
             fullWidth
             label="Password"
             name="password"
+            value={userInfo.password}
+            onChange={handleChange}
             type="password"
           />
           <TextField
@@ -55,6 +80,8 @@ const Register = () => {
             fullWidth
             label="Confirm Password"
             name="confirmPassword"
+            value={userInfo.confirmPassword}
+            onChange={handleChange}
             type="password"
           />
           <Button
@@ -72,3 +99,4 @@ const Register = () => {
 };
 
 export default Register;
+

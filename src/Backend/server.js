@@ -139,7 +139,7 @@ app.post("/register", async (req, res) => {
             res.status(404).send("All input is required");
         }
         const user = await User.findOne({email});
-        if(user && ( await bcrypt.compare(password, user.password))){
+        if(user && bcrypt.compare(password, user.password)){
             const token = jwt.sign(
                 {user_id: user._id, email},
                 process.env.TOKEN_KEY,
